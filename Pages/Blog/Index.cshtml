@@ -1,0 +1,77 @@
+@page
+@model Cs_razorweb.Pages.Blog.IndexModel
+
+@{
+    ViewData["Title"] = "Cac bai viet";
+    int i = 0;
+}
+
+@{
+    var pagingmodel = new Cs_razorweb.Helpers.PagingModel()
+    {
+        currenpage = Model.currentPage,
+        countpage = Model.countPage,
+        generateUrl = (int? p) => "trang" + p
+    };
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+
+<partial name="_Paging" model="@pagingmodel"/>
+<p>
+    <a asp-page="Create" class="btn btn-primary">Tao bai viet moi</a>
+</p>
+
+<form method="get" asp-page="./Index">
+    <label>Tim kiem</label>
+    <input name="SearchString" value="">
+    <button type="submit">Tim</button>
+</form>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            So thu tu
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Article[0].Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Article[0].Created)
+        </th>
+
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Article)
+    {
+        <tr>
+            <td>@(++i)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Sua</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Xem</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Xoa</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+</body>
+</html>

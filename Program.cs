@@ -32,3 +32,11 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
+/*
+    CREATE, READ, UPDATE, DELETE (CRUD)
+    
+    dotnet aspnet-codegenerator razorpage -m Cs_razorweb.Models.Article -dc Cs_razorweb.Models.MyBlogContext -outDir Pages/Blog -udl --referenceScriptLibraries
+    dotnet aspnet-codegenerator razorpage -m Cs_razorweb.Models.Article -dc Cs_razorweb.Models.MyBlogContext -outDir Pages/Blog --referenceScriptLibraries
+   
+*/
